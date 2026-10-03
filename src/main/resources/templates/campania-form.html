@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"><head th:replace="~{fragments :: head}"></head><body>
+<header th:replace="~{fragments :: nav}"></header><main class="form-page"><a class="back" href="/campanias">← Volver a voluntariados</a><span class="eyebrow">DA EL PRIMER PASO</span><h1 th:text="${campania.id == null ? 'Crear voluntariado.' : 'Editar voluntariado.'}"></h1>
+ <p th:if="${#lists.isEmpty(organizaciones)}" class="alert">Primero <a href="/organizaciones/nuevo">registra una organización</a> para publicar.</p>
+ <form class="panel" th:action="@{/campanias/guardar}" th:object="${campania}" method="post"><input type="hidden" th:field="*{id}"><div th:replace="~{fragments :: errors}"></div><div class="form-grid">
+  <label>Título<input th:field="*{titulo}" required maxlength="150"></label>
+  <label th:if="${esAdmin}">Organización<select th:field="*{organizacionId}" required><option value="">Selecciona una organización</option><option th:each="o : ${organizaciones}" th:value="${o.id}" th:text="${o.usuario.nombre}"></option></select></label>
+  <label class="full">¿De qué trata el voluntariado?<textarea th:field="*{descripcion}" required maxlength="255" rows="5" placeholder="Describe su propósito y qué harán los participantes."></textarea></label>
+  <label>Ubicación<input th:field="*{ubicacion}" required maxlength="255"></label>
+  <label>Fecha y hora<input th:field="*{fecha}" type="datetime-local" required></label>
+  <label>Cupos<input th:field="*{cupos}" type="number" required min="1" max="100000"></label>
+  <label>Requisitos<input th:field="*{requisitos}" maxlength="255"></label>
+ </div><div class="form-actions"><button th:disabled="${#lists.isEmpty(organizaciones)}">Guardar voluntariado ↗</button><a href="/campanias">Cancelar</a></div></form>
+</main></body></html>

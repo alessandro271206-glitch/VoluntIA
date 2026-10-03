@@ -1,0 +1,10 @@
+.registration-fields { margin-top: 24px; }
+.campaign-description { white-space: pre-wrap; overflow-wrap: anywhere; }
+.history-row form { align-self: center; }
+.history-row h2 { margin: 0; }
+.history-row p { font-size: 13px; }
+.nav nav { flex-wrap: wrap; }
+@media (max-width: 960px) {
+    .nav { flex-wrap: wrap; }
+    .nav nav { gap: 12px; }
+}

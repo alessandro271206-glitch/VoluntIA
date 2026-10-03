@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"><head th:replace="~{fragments :: head}"></head><body>
+<header th:replace="~{fragments :: nav}"></header>
+<main class="login"><span class="eyebrow">TU COMUNIDAD TE ESPERA</span><h1>El cambio empieza <em>contigo.</em></h1>
+ <p>Ingresa con el correo de tu cuenta de voluntario u organización.</p><div th:replace="~{fragments :: alerts}"></div>
+ <p th:if="${param.actualizada}" class="alert success" role="status">Tu cuenta fue actualizada. Ingresa nuevamente con tu correo y contraseña.</p>
+ <form th:action="@{/login}" method="post" class="panel">
+  <p th:if="${param.error}" role="alert" class="alert danger">Correo o contraseña incorrectos.</p>
+  <label>Correo electrónico (o admin)<input name="username" autocomplete="username" required autofocus></label>
+  <label>Contraseña<input name="password" type="password" autocomplete="current-password" required></label>
+  <button>Ingresar ↗</button>
+ </form><p>¿Todavía no tienes una cuenta? <a class="button outline" href="/registro">Crear cuenta →</a></p>
+</main></body></html>

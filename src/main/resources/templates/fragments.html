@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+ <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>Voluntia · Comunidad e impacto</title><link rel="stylesheet" href="/css/styles.css"><link rel="stylesheet" href="/css/perfiles.css"><script defer src="/js/app.js"></script>
+</head><body>
+<header th:fragment="nav" class="nav">
+ <a class="brand" href="/">❋ <span>voluntia<span class="dot">.</span></span></a>
+ <nav aria-label="Navegación principal">
+  <a href="/campanias" th:classappend="${seccion == 'campanias'} ? 'active'">Voluntariados</a>
+  <a th:if="${esOrganizacion}" href="/mis-voluntariados" th:classappend="${seccion == 'mis-voluntariados'} ? 'active'">Mis voluntariados</a>
+  <a th:if="${esVoluntario}" href="/mis-participaciones" th:classappend="${seccion == 'participaciones'} ? 'active'">Mis participaciones</a>
+  <a th:if="${esOrganizacion or esVoluntario}" href="/mi-cuenta" th:classappend="${seccion == 'mi-cuenta'} ? 'active'">Mi cuenta</a>
+  <a th:if="${esAdmin}" href="/voluntarios">Voluntarios</a><a th:if="${esAdmin}" href="/organizaciones">Organizaciones</a>
+ </nav>
+ <form th:if="${autenticado}" th:action="@{/logout}" method="post"><button class="outline small">Cerrar sesión</button></form>
+ <div class="actions" th:unless="${autenticado}"><a href="/login">Ingresar</a><a class="button small" href="/registro">Crear cuenta</a></div>
+</header>
+<div th:fragment="alerts"><p th:if="${exito}" th:text="${exito}" class="alert success" role="status"></p><p th:if="${error}" th:text="${error}" class="alert danger" role="alert"></p></div>
+<div th:fragment="errors" th:if="${#fields.hasAnyErrors()}" class="alert danger" role="alert"><p th:each="err : ${#fields.allErrors()}" th:text="${err}"></p></div>
+</body></html>

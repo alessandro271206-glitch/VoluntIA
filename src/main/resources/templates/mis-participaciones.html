@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"><head th:replace="~{fragments :: head}"></head><body>
+<header th:replace="~{fragments :: nav}"></header><main><div th:replace="~{fragments :: alerts}"></div>
+ <div class="page-heading"><div><span class="eyebrow">TU TIEMPO GENERA CAMBIO</span><h1>Mis <em>participaciones.</em></h1><p>Consulta tus inscripciones y tu historial de asistencia.</p></div><a class="button" href="/campanias">Explorar voluntariados ↗</a></div>
+ <div class="empty" th:if="${#lists.isEmpty(historial)}"><h2>Tu próxima buena acción te espera.</h2><p>Elige un voluntariado y únete para empezar.</p></div>
+ <section class="panel" th:unless="${#lists.isEmpty(historial)}"><article th:each="i : ${historial}" class="history-row"><div><h2><a th:href="@{/campanias/{id}(id=${i.campania.id})}" th:text="${i.campania.titulo}"></a></h2><p th:text="${i.campania.ubicacion}"></p><span class="badge" th:text="${i.estado == 'ASISTIO' ? 'Asistencia registrada' : 'Inscrito'}"></span></div><form th:if="${i.estado != 'ASISTIO'}" th:action="@{/campanias/{id}/salir(id=${i.campania.id})}" method="post" data-confirm="¿Salir de este voluntariado?"><button class="outline small">Salir del voluntariado</button></form></article></section>
+</main></body></html>

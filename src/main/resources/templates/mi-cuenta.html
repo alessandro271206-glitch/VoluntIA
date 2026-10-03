@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"><head th:replace="~{fragments :: head}"></head><body>
+<header th:replace="~{fragments :: nav}"></header>
+<main class="form-page"><span class="eyebrow" th:text="${org ? 'MI PERFIL DE ORGANIZACIÓN' : 'MI PERFIL DE VOLUNTARIO'}"></span><h1>Mi <em>cuenta.</em></h1><p>Actualiza tus datos. Si cambias tu correo o contraseña, deberás volver a iniciar sesión.</p><div th:replace="~{fragments :: alerts}"></div>
+ <form class="panel" th:action="@{/mi-cuenta/guardar}" th:object="${cuenta}" method="post">
+  <div th:replace="~{fragments :: errors}"></div><div class="form-grid">
+   <label>Nombre<input th:field="*{nombre}" required maxlength="100" autocomplete="name"></label>
+   <label>Correo electrónico<input th:field="*{email}" type="email" required maxlength="100" autocomplete="email"></label>
+   <label>Ubicación<input th:field="*{ubicacion}" required maxlength="255"></label>
+   <label>Nueva contraseña<input name="contrasena" type="password" minlength="6" maxlength="72" autocomplete="new-password"><small>Deja este campo vacío para conservar tu contraseña.</small></label>
+   <div th:if="${!org}" class="form-grid full"><label>Edad<input th:field="*{edad}" type="number" required min="16" max="120"></label><label>Habilidades<input th:field="*{habilidades}" maxlength="255"></label></div>
+   <div th:if="${org}" class="form-grid full"><label>RUC<input th:field="*{ruc}" required pattern="[0-9]{11}" maxlength="11" inputmode="numeric"></label><label>Información de contacto<input th:field="*{infoContacto}" required maxlength="200"></label></div>
+  </div><div class="form-actions"><button>Guardar mis datos ↗</button><a href="/campanias">Volver a voluntariados</a></div>
+ </form>
+</main></body></html>

@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"><head th:replace="~{fragments :: head}"></head><body>
+<header th:replace="~{fragments :: nav}"></header>
+<main><section class="hero"><div><span class="eyebrow">VOLUNTARED · JUNTOS HACEMOS MÁS</span>
+ <h1>Conecta con el impacto que tu <em>comunidad necesita.</em></h1>
+ <p>Conectamos personas y organizaciones para cuidar nuestro entorno y transformar vidas. Descubre oportunidades o publica una iniciativa para tu comunidad.</p>
+ <a class="button" href="/campanias">Explorar voluntariados ↗</a><a th:unless="${autenticado}" class="text-link" href="/registro">Crear cuenta →</a>
+ <div class="hero-note">AMBIENTE / COMUNIDAD / PARTICIPACIÓN</div></div>
+ <div class="hero-art" aria-label="Ilustración de una planta creciendo"><span class="sun"></span><div class="plant"><span class="leaf left"></span><span class="leaf right"></span><span class="stem"></span><span class="pot"></span></div><span class="art-label">Crecer juntos.<br><strong>Cambiar el mañana.</strong></span></div>
+ </section><section class="features"><article><span>01 / CONECTA</span><h2>Personas con propósito</h2><p>Crea tu cuenta de voluntario y encuentra oportunidades para aportar tu tiempo y habilidades.</p></article><article><span>02 / ORGANIZA</span><h2>Campañas que movilizan</h2><p>Como organización, publica voluntariados y gestiona sus participantes.</p></article><article><span>03 / PARTICIPA</span><h2>Una comunidad activa</h2><p>Únete a una iniciativa y consulta tus participaciones desde tu cuenta.</p></article></section><footer>Voluntia · Una iniciativa de VoluntaRed</footer>
+</main></body></html>

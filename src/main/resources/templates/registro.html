@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"><head th:replace="~{fragments :: head}"></head><body>
+<header th:replace="~{fragments :: nav}"></header>
+<main class="form-page"><span class="eyebrow">CADA PERSONA SUMA</span><h1>Crea tu cuenta <em>en Voluntia.</em></h1><p>Elige tu perfil para participar o publicar voluntariados.</p>
+ <form class="panel" th:action="@{/registro}" th:object="${cuenta}" method="post">
+  <div th:replace="~{fragments :: errors}"></div>
+  <label>Tipo de cuenta<select id="perfil-registro" name="perfil"><option value="VOLUNTARIO" th:selected="${perfil == 'VOLUNTARIO'}">Voluntario</option><option value="ORGANIZACION" th:selected="${perfil == 'ORGANIZACION'}">Organización</option></select></label>
+  <div class="form-grid registration-fields">
+   <label>Nombre<input th:field="*{nombre}" required maxlength="100" autocomplete="name"></label>
+   <label>Correo electrónico<input th:field="*{email}" type="email" required maxlength="100" autocomplete="email"></label>
+   <label>Ubicación<input th:field="*{ubicacion}" required maxlength="255" placeholder="Ciudad o distrito"></label>
+   <label>Contraseña<input name="contrasena" type="password" required minlength="6" maxlength="72" autocomplete="new-password"><small>Al menos 6 caracteres.</small></label>
+   <div data-profile="VOLUNTARIO" class="form-grid full" th:hidden="${perfil != 'VOLUNTARIO'}">
+    <label>Edad<input th:field="*{edad}" type="number" min="16" max="120" th:required="${perfil == 'VOLUNTARIO'}" th:disabled="${perfil != 'VOLUNTARIO'}"></label>
+    <label>Habilidades<input th:field="*{habilidades}" maxlength="255" th:disabled="${perfil != 'VOLUNTARIO'}"></label>
+   </div>
+   <div data-profile="ORGANIZACION" class="form-grid full" th:hidden="${perfil != 'ORGANIZACION'}">
+    <label>RUC<input th:field="*{ruc}" maxlength="11" pattern="[0-9]{11}" inputmode="numeric" th:required="${perfil == 'ORGANIZACION'}" th:disabled="${perfil != 'ORGANIZACION'}"></label>
+    <label>Información de contacto<input th:field="*{infoContacto}" maxlength="200" th:required="${perfil == 'ORGANIZACION'}" th:disabled="${perfil != 'ORGANIZACION'}"></label>
+   </div>
+  </div><div class="form-actions"><button>Crear cuenta ↗</button><a href="/login">Ya tengo una cuenta</a></div>
+ </form>
+</main></body></html>
